@@ -1,0 +1,24 @@
+{
+    "manifest_version": 2,
+    "name": "Get all senders",
+    "description": "This extension retrieves all the senders associated with the emails in this mailbox and stores them in your clipboard.",
+    "version": "1.0",
+    "applications": {
+        "gecko": {
+            "id": "get-all-senders@CicadaCinema",
+            "strict_min_version": "78.0"
+        }
+    },
+    "browser_action": {
+        "default_popup": "mainPopup/popup.html",
+        "default_title": "Get all senders",
+        "default_icon": "images/icon.png"
+    },
+    "icons": {
+        "34": "images/icon.png"
+    },
+	"permissions": [
+		"messagesRead",
+		"clipboardWrite"
+	]
+}
