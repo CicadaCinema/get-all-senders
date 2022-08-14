@@ -20,7 +20,7 @@ async function load() {
 	})
 
 	navigator.clipboard.writeText(text);
-	document.getElementsByClassName("popup-page")[0].innerHTML = "Done! Check your clipboard.";
+	document.getElementById("popup-page").innerHTML = "Done! Check your clipboard.";
 }
 
 document.addEventListener("DOMContentLoaded", load);
