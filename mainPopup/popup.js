@@ -32,17 +32,25 @@ async function load() {
 		setInfoText("Done! Check your clipboard.");
 
 	} catch (e) {
-		let debugMessage = "Copy the error message log in <code>Thunderbird Menu > Tools > Developer Tools > Error Console</code>, redacting any personal information.";
 		if (e) {
-			debugMessage = `Copy this error message, redacting any personal information: <pre><code>${e.toString()}</code></pre>`;
+			setInfoText(`The add-on encountered an unexpected error!<br>
+			Copy the error message below, redacting any personal information.<br>
+			Please leave a review of this add-on or open a GitHub issue with the error message text to report this problem. 
+			<a href = "https://github.com/CicadaCinema/get-all-senders/issues/new">Open GitHub Issue</a><br>`);
+
+			const preElement = document.createElement("pre");
+			const codeElement = document.createElement("code");
+
+			codeElement.textContent = e.toString();
+
+			preElement.appendChild(codeElement);
+			document.getElementById("popup-page").appendChild(preElement);
+		} else {
+			setInfoText(`The add-on encountered an unexpected error!<br>
+			Copy the error message log in <code>Thunderbird Menu > Tools > Developer Tools > Error Console</code>, redacting any personal information.<br>
+			Please leave a review of this add-on or open a GitHub issue with the error message text to report this problem. 
+			<a href = "https://github.com/CicadaCinema/get-all-senders/issues/new">Open GitHub Issue</a><br>`);
 		}
-
-		let errorMessage = `The add-on encountered an unexpected error!<br>
-		${debugMessage}<br>
-		Please leave a review of this add-on or open a GitHub issue with the error message text to report this problem. 
-		<a href = "https://github.com/CicadaCinema/get-all-senders/issues/new">Open GitHub Issue</a><br>`;
-
-		setInfoText(errorMessage);
 	}
 }
 
