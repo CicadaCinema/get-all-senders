@@ -12,14 +12,14 @@ async function load() {
 
 		setInfoText(`Processing page ${counter++}...`);
 		for (let message of page.messages) {
-			senders.add(message.author)
+			message.ccList.forEach(ccString => senders.add(ccString))
 		}
 
 		while (page.id) {
 			setInfoText(`Processing page ${counter++}...`);
 			page = await messenger.messages.continueList(page.id);
 			for (let message of page.messages) {
-				senders.add(message.author)
+				message.ccList.forEach(ccString => senders.add(ccString))
 			}
 		}
 
