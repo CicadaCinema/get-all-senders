@@ -2,6 +2,15 @@ function setInfoText(text) {
 	document.getElementById("popup-page").innerHTML = text;
 }
 
+
+function cleanAuthorString(author) {
+    let cleaned = author;
+    cleaned = cleaned.replace(/\"/g, '');              // Delete """
+    cleaned = cleaned.replace(" <", ",");              // Replace " <" with ","
+    cleaned = cleaned.replace(/>/g, '');               // Delete ">"
+    return cleaned;
+}
+
 async function load() {
 
 	try {
@@ -12,14 +21,14 @@ async function load() {
 
 		setInfoText(`Processing page ${counter++}...`);
 		for (let message of page.messages) {
-			senders.add(message.author)
+			senders.add(cleanAuthorString(message.author));
 		}
 
 		while (page.id) {
 			setInfoText(`Processing page ${counter++}...`);
 			page = await messenger.messages.continueList(page.id);
 			for (let message of page.messages) {
-				senders.add(message.author)
+				senders.add(cleanAuthorString(message.author));
 			}
 		}
 
